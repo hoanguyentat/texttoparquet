@@ -124,7 +124,7 @@ public class ParquetConvertFile extends Configured implements Tool {
 //		String output = "/user/hoant/parquet/output";
 		
 		String input = "hdfs://10.3.24.154:9000/data/rawText";
-		String output = "hdfs://10.3.24.154:9000//user/hoant/parquet/output";
+		String output = "hdfs://10.3.24.154:9000/user/hoant/parquet/output";
 		
 		FileSystem fs = FileSystem.get(getConf());
 		
