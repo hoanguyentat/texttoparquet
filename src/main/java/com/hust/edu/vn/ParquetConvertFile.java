@@ -121,7 +121,10 @@ public class ParquetConvertFile extends Configured implements Tool {
 		job.setOutputKeyClass(Void.class);
 		job.setOutputValueClass(Group.class);
 		
-		String input = "/user/hoant/data/rawText";
+//		String input = "/user/data/rawText";
+//		String output = "/user/hoant/parquet/output";
+		
+		String input = "/data/rawText";
 		String output = "/user/hoant/parquet/output";
 		
 		FileSystem fs = FileSystem.get(getConf());
