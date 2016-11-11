@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -99,16 +100,16 @@ public class ParquetConvertFile extends Configured implements Tool {
 	public int run(String[] arg0) throws Exception {
 		// TODO Auto-generated method stub
 		
-//		Configuration conf = new Configuration();
-//		
-//		conf.addResource(new Path("resource/config/core-site.xml"));
-//		conf.addResource(new Path("resource/config/hbase-site.xml"));
-//		conf.addResource(new Path("resource/config/hdfs-site.xml"));
-//		conf.addResource(new Path("resource/config/mapred-site.xml"));
-//		conf.addResource(new Path("resource/config/yarn-site.xml"));
-//		conf.set("fs.default.name", "hdfs://10.3.24.154:9000");
+		Configuration conf = new Configuration();
 		
-		Job job = new Job(getConf(), "parquet");
+		conf.addResource(new Path("resource/config/core-site.xml"));
+		conf.addResource(new Path("resource/config/hbase-site.xml"));
+		conf.addResource(new Path("resource/config/hdfs-site.xml"));
+		conf.addResource(new Path("resource/config/mapred-site.xml"));
+		conf.addResource(new Path("resource/config/yarn-site.xml"));
+		conf.set("fs.default.name", "hdfs://10.3.24.154:9000");
+		
+		Job job = new Job(conf, "parquet");
 		job.setJarByClass(getClass());
 		
 		job.setMapperClass(MapPQ.class);
