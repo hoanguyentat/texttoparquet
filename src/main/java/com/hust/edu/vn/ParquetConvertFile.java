@@ -83,14 +83,17 @@ public class ParquetConvertFile extends Configured implements Tool {
 				String[] fields =  line.split("\t");
 				System.out.println(fields.length);
 				for(int i = 0; i < field.length; i++){
-					if(i == 2 || i == 4 || i == 7 || i == 9 || i == 10 || i == 18){
-						record.put(field[i], Integer.parseInt(fields[i]));
-					} else if(i == 6 || i == 13){
-						record.put(field[i], Long.parseLong(fields[i]));
-					} else{
-						record.put(field[i], fields[i]);
+					try{
+						if(i == 2 || i == 4 || i == 7 || i == 9 || i == 10 || i == 18){
+							record.put(field[i], Integer.parseInt(fields[i]));
+						} else if(i == 6 || i == 13){
+							record.put(field[i], Long.parseLong(fields[i]));
+						} else{
+							record.put(field[i], fields[i]);
+						}
+					} catch(Exception e){
+						System.out.println(e.toString());
 					}
-					
 				}
 //			}
 			context.write(null, record);
@@ -121,7 +124,7 @@ public class ParquetConvertFile extends Configured implements Tool {
 		job.setOutputKeyClass(Void.class);
 		job.setOutputValueClass(Group.class);
 		
-//		String input = "/user/data/rawText";
+//		String input = "/user/hoant/data/rawText";
 //		String output = "/user/hoant/parquet/output";
 		
 		String input = "hdfs://10.3.24.154:9000/data/rawText";
